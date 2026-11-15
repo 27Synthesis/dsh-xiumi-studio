@@ -50,7 +50,10 @@
 
 ## 下载安装（Windows 桌面版，免安装）
 
-不想配环境、只想双击打开：去 **GitHub Releases** 下 `dsh-xiumi-studio-<版本>-win-x64.zip`。
+不想配环境、只想双击打开：直接下 **[Releases 里的最新包](https://github.com/27Synthesis/dsh-xiumi-studio/releases/latest)**
+（`dsh-xiumi-studio-<版本>-win-x64.zip`，约 150MB；同页有 `SHA256SUMS.txt`，下完可以对一下）。
+
+不想装 exe、只想用插件：把仓库里的 `dsh-xiumi/` 放进 DSH 插件目录（见文末「从源码构建」）。
 
 | 步骤 | 做什么 |
 | --- | --- |
