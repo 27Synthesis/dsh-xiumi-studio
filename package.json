@@ -15,11 +15,10 @@
   },
   "files": [
     "index.mjs",
-    "client/client.js",
+    "client",
     "cordis.patch.yml",
     "host",
     "skills",
-    "references",
     "locale/*.json",
     "icon.svg"
   ],

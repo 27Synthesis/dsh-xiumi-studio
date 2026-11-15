@@ -66,7 +66,15 @@
 `ELECTRON_RUN_AS_NODE`），`dsh-xiumi.exe` 是 Electron 本体，**直接双击会闪退**（原因见 `desktop/README.md`）。
 启动日志在 `%LOCALAPPDATA%\dsh-xiumi-desktop\desktop.log`；起不来时会自己弹一个错误窗口写着日志路径。
 
-装成 DSH 插件：把本目录放进 profile 的插件位置，并在 `cordis.patch.yml` 里 `- insert:` 挂上 `dsh-xiumi-studio`。
+装成 DSH 插件，两种都行：
+
+```sh
+# 1) 直接装打包好的 tgz（不用克隆仓库、不用装依赖）
+dsh plugin add https://github.com/27Synthesis/dsh-xiumi-studio/releases/download/v0.1.0/dsh-xiumi-studio-0.1.0.tgz
+
+# 2) 从源码装：把本目录放进 profile 的插件位置，并在 cordis.patch.yml 里 `- insert:` 挂上 dsh-xiumi-studio
+```
+
 装好后面板出现在右侧栏「秀米」，模型侧多出 16 个工具（见下）。
 
 ## 三条硬约束（代码里是真的会拦 / 会报的）
