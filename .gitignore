@@ -1,0 +1,34 @@
+# 依赖
+node_modules/
+
+# 构建产物：桌面包里塞了整套 Electron 运行时（200MB+），不进仓库
+desktop/dist/
+release/
+*.zip
+
+# 运行时生成的用户数据 / 日志（.profile* 是 userData 的兜底目录）
+desktop/.profile*/
+desktop/.smoke/
+desktop/_shots/
+*.log
+debug.log
+
+# 作者本机的探针、测试固件与截图（含真实稿件，绝不进仓库）
+_inspect/
+.gh-shots/
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 本地工程数据与授权凭证（每台机器自己生成，绝不能提交）
+.xiumi/
+.dsh-xiumi/
+.xiumi-*/
+profiles/
+
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

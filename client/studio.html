@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>秀米工作台 · Xiumi Studio</title>
+<link rel="stylesheet" href="/xiumi/studio/studio.css" />
+</head>
+<body>
+<div class="boot" id="boot"><div class="boot-mark"></div><p>正在打开工作台…</p></div>
+
+<div class="shell" id="shell" hidden>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-glyph">米</span>
+      <span class="brand-text">
+        <b>秀米工作台</b>
+        <i id="cwdLabel">—</i>
+      </span>
+    </div>
+    <div class="docline">
+      <span class="doc-title" id="docTitle">还没有图文</span>
+      <span class="doc-state" id="docState"><em></em>草稿</span>
+    </div>
+    <div class="actions">
+      <button class="xiumi-chip" id="btnXiumiChip" type="button" title="连接秀米账号（只有你本人能登录）">
+        <span class="chip-dot"></span><span class="chip-label" id="chipLabel">连接秀米</span>
+      </button>
+      <button class="btn ghost" id="btnFull" type="button" title="在新标签里打开三栏工作台：工程与大纲 + 手机预览 + 主题/封面/素材"><span class="full-icon">⤢</span><span class="full-text">完整工作台</span></button>
+      <button class="btn ghost" id="btnTemplates" type="button" title="套模板：把秀米账号里存过的模板灌进这篇，文字段落与图位自动对上"><span class="tpl-open-icon">▤</span><span class="tpl-open-text">套模板</span></button>
+      <button class="btn ghost" id="btnRefresh" title="重新读取工程">刷新</button>
+      <button class="btn ghost" id="btnAddImages" title="补图：图片和文字分开发时，把图片插进正文">补图</button>
+      <button class="btn ghost" id="btnDuplicate" title="另存一版：复制成新工程，改坏了能回来对照">另存一版</button>
+      <button class="btn ghost" id="btnExport" title="导出可粘贴的 HTML">导出 HTML</button>
+      <button class="btn" id="btnCopy">复制到秀米</button>
+      <button class="btn primary" id="btnPublish" title="通过秀米 MCP 直接投到「我的图文」">发布到我的图文</button>
+    </div>
+  </header>
+
+  <div class="authbar" id="authBar" hidden>
+    <span class="authbar-text" id="authBarText">浏览器拦住了秀米登录窗口。</span>
+    <button class="btn ghost" id="authBarCopy" type="button">复制链接</button>
+    <a class="authbar-link" id="authBarLink" href="#" target="_blank" rel="noopener noreferrer">手动打开授权页</a>
+    <button class="btn ghost" id="authBarClose" type="button">知道了</button>
+  </div>
+
+  <main class="stage">
+    <aside class="rail left" id="railLeft">
+      <section class="pane">
+        <h2 class="pane-title">工程</h2>
+        <ul class="project-list" id="projectList"></ul>
+      </section>
+      <section class="pane grow">
+        <h2 class="pane-title">大纲<span class="pane-hint" id="outlineCount"></span></h2>
+        <ul class="outline" id="outline"></ul>
+      </section>
+    </aside>
+
+    <section class="canvas">
+      <div class="canvas-head">
+        <span class="canvas-label">实时预览</span>
+        <span class="canvas-meta" id="canvasMeta"></span>
+      </div>
+      <div class="preview-alert" id="previewAlert" hidden></div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <iframe id="preview" title="图文预览" sandbox="allow-same-origin allow-scripts allow-popups"></iframe>
+      </div>
+      <div class="canvas-foot" id="canvasFoot"></div>
+    </section>
+
+    <aside class="rail right">
+      <section class="pane">
+        <h2 class="pane-title">配色主题</h2>
+        <div class="swatches" id="swatches"></div>
+        <p class="pane-note" id="themeNote">标题最深、正文居中、注释最浅。</p>
+      </section>
+
+      <section class="pane">
+        <h2 class="pane-title">参考模板<span class="pane-hint" id="tplHint"></span></h2>
+        <div class="tpl-search">
+          <input type="search" id="tplQ" placeholder="党建 / 讲座 / 换届 / 校园" />
+          <button class="btn ghost" id="btnTplSearch" type="button">找</button>
+        </div>
+        <ul class="tpl-list" id="tplList"></ul>
+        <p class="pane-note">只做参考：看气质、定配色，点「预览」去秀米看整篇。
+          <button class="linky" id="btnTplRefresh" type="button">重拉目录</button></p>
+      </section>
+
+      <section class="pane">
+        <h2 class="pane-title">封面<span class="pane-hint">900 × 383</span></h2>
+        <div class="cover-frame" id="coverFrame"><span class="cover-empty">还没有封面</span></div>
+        <button class="btn ghost wide" id="btnCover">重新生成封面</button>
+      </section>
+
+      <section class="pane">
+        <h2 class="pane-title">素材<span class="pane-hint" id="assetHint"></span></h2>
+        <div class="drop" id="dropZone" title="图片和文字分开发时，把图拖到这里">
+          <b>把分开发的图拖进来</b>
+          <span>也可以点这里选文件 · 一次多张</span>
+        </div>
+        <button class="btn ghost wide" id="btnLayoutImages" title="把正文里的图按小标题重新分（顺序不变）">图片按小节分</button>
+        <ul class="asset-list" id="assetList"></ul>
+      </section>
+
+      <section class="pane">
+        <h2 class="pane-title">这篇稿子</h2>
+        <dl class="stats" id="stats"></dl>
+      </section>
+
+      <section class="pane">
+        <h2 class="pane-title">秀米<span class="pane-hint" id="xiumiHint"></span></h2>
+        <div class="xiumi-row" id="xiumiRow"></div>
+        <button class="btn ghost wide" id="btnConnect">连接秀米账号</button>
+      </section>
+
+      <section class="pane grow">
+        <h2 class="pane-title">创作过程</h2>
+        <ol class="timeline" id="timeline"></ol>
+      </section>
+    </aside>
+  </main>
+
+  <!-- 套模板抽屉：右侧滑出，不挡预览的可读宽度；手机上占满一屏 -->
+  <aside class="drawer" id="tplDrawer" hidden aria-hidden="true" aria-labelledby="tplDrawerTitle">
+    <header class="drawer-head">
+      <div class="drawer-heading">
+        <b id="tplDrawerTitle">套模板</b>
+        <span class="drawer-sub">选一篇秀米里的模板，把这边的文字和图灌进它的槽位</span>
+      </div>
+      <div class="drawer-actions">
+        <button class="btn ghost" id="btnTplDrawerRefresh" type="button" title="重新读秀米账号里的模板">刷新</button>
+        <button class="btn ghost" id="btnTplDrawerClose" type="button" aria-label="关闭模板面板">关闭</button>
+      </div>
+    </header>
+    <div class="drawer-alert" id="tplDrawerAlert" hidden></div>
+    <div class="drawer-body" id="tplDrawerBody"></div>
+  </aside>
+</div>
+
+<input type="file" id="filePick" accept="image/png,image/jpeg,image/gif,image/webp" multiple hidden />
+<div class="toast-wrap" id="toasts"></div>
+<script src="/xiumi/studio/studio.js"></script>
+</body>
+</html>

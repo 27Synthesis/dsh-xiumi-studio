@@ -1,0 +1,49 @@
+{
+  "name": "dsh-xiumi-studio",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "秀米图文台：把 Word 材料排成秀米图文，AI 实时编排、面板预览、直接发布到「我的图文」。",
+  "main": "./index.mjs",
+  "icon": "./icon.svg",
+  "exports": {
+    ".": "./index.mjs",
+    "./client": "./client/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.mjs",
+    "client/client.js",
+    "cordis.patch.yml",
+    "host",
+    "skills",
+    "references",
+    "locale/*.json",
+    "icon.svg"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-sidebar-right"
+      ]
+    },
+    "manifestVersion": 1
+  },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-client-ui-sidebar-right": "*"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-client-ui-sidebar-right": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
